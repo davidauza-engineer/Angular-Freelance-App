@@ -15,6 +15,6 @@ import { HomepageComponent } from './homepage/homepage.component';
     AppRoutingModule
   ],
   providers: [],
-  bootstrap: [HomepageComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
