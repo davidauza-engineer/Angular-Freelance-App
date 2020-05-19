@@ -25,3 +25,7 @@
 .dropdown a:hover {
   color: #252830;
 }
+
+.dropdown a.active {
+  color: white;
+}
