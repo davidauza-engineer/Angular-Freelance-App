@@ -2,17 +2,23 @@
   <h1 class="headline">{{ pageTitle }}</h1>
 
   <div class="card mb-3" *ngFor="let doc of documents">
-    <img class="card-img-top" src="{{ doc.image_url }}" alt="Card image cap" width="100%">
+    <img class="card-img-top" src="{{ doc.image_url }}" alt="Card image cap"
+         width="100%">
 
     <div class="card-body">
       <h4 class="card-title">{{ doc.title }}</h4>
+      <p class="card-text">
+        <small class="text-muted">
+          Last updated: {{ doc.updated_at | date }}
+        </small>
+      </p>
       <p class="card-text">{{ doc.description }}</p>
       <div>
-        <a class="btn btn-lg btn-primary" href="{{ doc.file_url }}">Download File</a>
+        <a class="btn btn-lg btn-primary" href="{{ doc.file_url }}"
+           target="_blank" rel="noopener noreferrer">
+          Download File
+        </a>
       </div>
-      <p class="card-text">
-        <small class="text-muted">{{ doc.updated_at }}</small>
-      </p>
     </div>
   </div>
 </div>
