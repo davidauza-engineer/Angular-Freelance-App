@@ -12,6 +12,7 @@ import { DocumentsService } from './documents/documents.service';
 import { ProposalListComponent } from './proposals/proposal-list/proposal-list.component';
 import { ProposalNewComponent } from './proposals/proposal-new/proposal-new.component';
 import { ProposalShowComponent } from './proposals/proposal-show/proposal-show.component';
+import { ProposalService } from './proposals/proposal.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ProposalShowComponent } from './proposals/proposal-show/proposal-show.c
     HttpClientModule
   ],
   providers: [
-    DocumentsService
+    DocumentsService,
+    ProposalService
   ],
   bootstrap: [AppComponent]
 })

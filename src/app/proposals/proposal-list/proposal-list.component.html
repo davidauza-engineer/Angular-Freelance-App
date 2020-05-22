@@ -7,7 +7,7 @@
       <a routerLink="/proposals/{{ proposal.id }}" class="proposal-link">
         <h5 class="list-group-item-heading">{{ proposal.customer }}</h5>
         <p class="list-group-item-text">
-          {{ proposal.hourly_rate * proposal.estimated_hours | currency:'USD':true:'.0' }}
+          {{ proposal.hourly_rate * proposal.estimated_hours | currency:'USD':'symbol':'.0' }}
         </p>
       </a>
     </span>
