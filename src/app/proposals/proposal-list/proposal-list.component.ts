@@ -1,33 +1,37 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { timer } from 'rxjs';
 import { Proposal } from '../proposal';
+import { ProposalService } from '../proposal.service';
 
 @Component({
   selector: 'app-proposal-list',
   templateUrl: './proposal-list.component.html',
-  styleUrls: ['./proposal-list.component.css']
+  styleUrls: ['./proposal-list.component.css'],
+  providers: [ProposalService]
 })
 export class ProposalListComponent implements OnInit {
-  proposalOne: Proposal = new Proposal(15, 'Abc Company',
-    'http://davidauza.engineer', 'Ruby on Rails',
-    150, 120, 15,
-    'davidauza01@gmail.com');
-  proposalTwo: Proposal = new Proposal(99, 'XYZ Company',
-    'http://davidauza.engineer', 'Ruby on Rails',
-    150, 120, 15,
-    'davidauza01@gmail.com');
-  proposalThree: Proposal = new Proposal(300, 'Something Company',
-    'http://davidauza.engineer', 'Ruby on Rails',
-    150, 120, 15,
-    'davidauza01@gmail.com');
-  proposals: Proposal[] = [
-    this.proposalOne,
-    this.proposalTwo,
-    this.proposalThree
-  ];
+  proposals: Proposal[];
 
-  constructor() { }
+  constructor(
+    private proposalService: ProposalService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    const timeVar = timer(0, 5000);
+    timeVar.subscribe(() => this.getProposals());
   }
 
+  getProposals() {
+    this.proposalService.getProposals()
+      .subscribe(
+        proposals => this.proposals = proposals
+      );
+  }
+
+  goToShow(proposal: Proposal): void {
+    const link = ['/proposals', proposal.id];
+    this.router.navigate(link);
+  }
 }

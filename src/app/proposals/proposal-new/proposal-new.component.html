@@ -4,7 +4,7 @@
       <h1>Create a Proposal</h1>
 
       <div>
-        <form #proposalForm="ngForm">
+        <form (ngSubmit)="createProposal(proposal)" #proposalForm="ngForm">
           <div class="form-group">
             <label for="customer">Customer Name</label>
             <input type="text"
@@ -114,7 +114,7 @@
             </div>
           </div>
 
-          <div class="form-input">
+          <div class="form-input mb-4">
             <label for="client_email">Client email <em>(Optional)</em></label>
             <input type="email"
                    class="form-control"
@@ -123,6 +123,17 @@
                    #client_email="ngModel"
                    [(ngModel)]="proposal.client_email"
             >
+          </div>
+
+          <button type="submit" class="btn btn-outline-primary btn-lg"
+                  [disabled]="!proposalForm.form.valid"
+                  [hidden]="submitted"
+          >
+            Generate Proposal
+          </button>
+
+          <div [hidden]="!submitted" class="alert alert-success" role="alert">
+            Your proposal has been generated <a routerLink="/proposals" class="alert-link">View all proposals</a>
           </div>
         </form>
       </div>
@@ -159,7 +170,7 @@
           {{ proposal.weeks_to_complete }} weeks to complete and with my hourly
           rate of
           {{ proposal.hourly_rate }}/hour, the estimated total will be
-          {{ proposal.hourly_rate * proposal.estimated_hours | currency:'USD':true:'.0' }}.
+          {{ proposal.hourly_rate * proposal.estimated_hours | currency:'USD':'symbol':'.0' }}.
         </p>
 
         <p>The next step from here is to set up a meeting to finalize the
