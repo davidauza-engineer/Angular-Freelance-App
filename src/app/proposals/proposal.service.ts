@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { Proposal } from './proposal';
 
@@ -24,6 +24,14 @@ export class ProposalService {
 
   getProposal(id: number) {
     return this.http.get(this.proposalsUrl + '/' + id);
+  }
+
+  createProposal(proposal) {
+    const options = {
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
+    };
+    return this.http.post(this.proposalsUrl, JSON.stringify(proposal), options)
+      .pipe(map((res: Response) => res));
   }
 
   private handleError(error: HttpErrorResponse) {
